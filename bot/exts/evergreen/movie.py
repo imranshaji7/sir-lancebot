@@ -1,7 +1,7 @@
 import logging
 import random
 from enum import Enum
-from typing import Any, Dict, List, Tuple
+from typing import Any
 from urllib.parse import urlencode
 
 from aiohttp import ClientSession
@@ -108,7 +108,7 @@ class Movie(Cog):
         """Show all currently available genres for .movies command."""
         await ctx.send(f"Current available genres: {', '.join('`' + genre.name + '`' for genre in MovieGenres)}")
 
-    async def get_movies_data(self, client: ClientSession, genre_id: str, page: int) -> List[Dict[str, Any]]:
+    async def get_movies_data(self, client: ClientSession, genre_id: str, page: int) -> list[dict[str, Any]]:
         """Return JSON of TMDB discover request."""
         # Define params of request
         params = {
@@ -127,7 +127,7 @@ class Movie(Cog):
         async with client.get(url) as resp:
             return await resp.json()
 
-    async def get_pages(self, client: ClientSession, movies: Dict[str, Any], amount: int) -> List[Tuple[str, str]]:
+    async def get_pages(self, client: ClientSession, movies: dict[str, Any], amount: int) -> list[tuple[str, str]]:
         """Fetch all movie pages from movies dictionary. Return list of pages."""
         pages = []
 
@@ -140,14 +140,14 @@ class Movie(Cog):
 
         return pages
 
-    async def get_movie(self, client: ClientSession, movie: int) -> Dict:
+    async def get_movie(self, client: ClientSession, movie: int) -> dict:
         """Get Movie by movie ID from TMDB. Return result dictionary."""
         url = BASE_URL + f"movie/{movie}?" + urlencode(MOVIE_PARAMS)
 
         async with client.get(url) as resp:
             return await resp.json()
 
-    async def create_page(self, movie: Dict[str, Any]) -> Tuple[str, str]:
+    async def create_page(self, movie: dict[str, Any]) -> tuple[str, str]:
         """Create page from TMDB movie request result. Return formatted page + image."""
         text = ""
 

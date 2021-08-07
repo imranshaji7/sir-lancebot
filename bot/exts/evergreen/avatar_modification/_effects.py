@@ -31,7 +31,7 @@ class PfpEffects:
         return discord.File(bufferedio, filename=filename)
 
     @staticmethod
-    def closest(x: t.Tuple[int, int, int]) -> t.Tuple[int, int, int]:
+    def closest(x: tuple[int, int, int]) -> tuple[int, int, int]:
         """
         Finds the closest "easter" colour to a given pixel.
 
@@ -39,7 +39,7 @@ class PfpEffects:
         """
         r1, g1, b1 = x
 
-        def distance(point: t.Tuple[int, int, int]) -> t.Tuple[int, int, int]:
+        def distance(point: tuple[int, int, int]) -> int:
             """Finds the difference between a pastel colour and the original pixel colour."""
             r2, g2, b2 = point
             return (r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2
@@ -201,7 +201,7 @@ class PfpEffects:
         return new_imgs
 
     @staticmethod
-    def join_images(images: t.List[Image.Image]) -> Image.Image:
+    def join_images(images: list[Image.Image]) -> Image.Image:
         """
         Stitches all the image squares into a new image.
 

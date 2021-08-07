@@ -14,8 +14,8 @@ import typing
 log = logging.getLogger(__name__)
 
 # A type alias to annotate the tuples returned from `sys.exc_info()`
-ExcInfo = typing.Tuple[typing.Type[Exception], Exception, types.TracebackType]
-Namespace = typing.Dict[str, typing.Any]
+ExcInfo = tuple[type[Exception], Exception, types.TracebackType]
+Namespace = dict[str, typing.Any]
 
 # This will be used as an coroutine function wrapper for the code
 # to be evaluated. The wrapper contains one `pass` statement which
@@ -93,7 +93,7 @@ class EvalContext:
         self.eval_tree = None
 
     @property
-    def dependencies(self) -> typing.Dict[str, typing.Any]:
+    def dependencies(self) -> dict[str, typing.Any]:
         """
         Return a mapping of the dependencies for the wrapper function.
 
@@ -111,12 +111,12 @@ class EvalContext:
         }
 
     @property
-    def locals(self) -> typing.Dict[str, typing.Any]:
+    def locals(self) -> dict[str, typing.Any]:
         """Return a mapping of names->values needed for evaluation."""
         return {**collections.ChainMap(self.dependencies, self.context_vars, self._locals)}
 
     @locals.setter
-    def locals(self, locals_: typing.Dict[str, typing.Any]) -> None:
+    def locals(self, locals_: dict[str, typing.Any]) -> None:
         """Update the contextual mapping of names to values."""
         log.trace(f"Updating {self._locals} with {locals_}")
         self._locals.update(locals_)
@@ -195,7 +195,7 @@ class WrapEvalCodeTree(ast.NodeTransformer):
         new_tree = self.visit(self.wrapper)
         return ast.fix_missing_locations(new_tree)
 
-    def visit_Pass(self, node: ast.Pass) -> typing.List[ast.AST]:  # noqa: N802
+    def visit_Pass(self, node: ast.Pass) -> list[ast.AST]:  # noqa: N802
         """
         Replace the `_ast.Pass` node in the wrapper function by the eval AST.
 
