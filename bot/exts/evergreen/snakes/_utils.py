@@ -100,7 +100,7 @@ DEFAULT_SNAKE_LENGTH = 22
 DEFAULT_SNAKE_WIDTH = 8
 DEFAULT_SEGMENT_LENGTH_RANGE = (7, 10)
 DEFAULT_IMAGE_MARGINS = (50, 50)
-DEFAULT_TEXT: str = "snek\nit\nup"
+DEFAULT_TEXT = "snek\nit\nup"
 DEFAULT_TEXT_POSITION = (
     10,
     10
@@ -280,7 +280,7 @@ def create_snek_frame(
         image_margins: tuple[int, int] = DEFAULT_IMAGE_MARGINS,
         snake_length: int = DEFAULT_SNAKE_LENGTH,
         snake_color: int = DEFAULT_SNAKE_COLOR, bg_color: int = DEFAULT_BACKGROUND_COLOR,
-        segment_length_range: tuple[int, ...] = DEFAULT_SEGMENT_LENGTH_RANGE, snake_width: int = DEFAULT_SNAKE_WIDTH,
+        segment_length_range: tuple[int, int] = DEFAULT_SEGMENT_LENGTH_RANGE, snake_width: int = DEFAULT_SNAKE_WIDTH,
         text: str = DEFAULT_TEXT, text_position: tuple[float, float] = DEFAULT_TEXT_POSITION,
         text_color: int = DEFAULT_TEXT_COLOR
 ) -> Image.Image:
